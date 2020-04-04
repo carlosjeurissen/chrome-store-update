@@ -1,0 +1,24 @@
+{
+  "name": "chrome-store-update",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Update a Chrome Store listings programatically",
+  "repository": "carlosjeurissen/chrome-store-update",
+  "author": "Carlos Jeurissen",
+  "license": "MIT",
+  "dependencies": {
+    "chrome-webstore-upload": "^0.2.2"
+  },
+  "keywords": [
+    "chrome",
+    "store",
+    "update",
+    "webextension",
+    "extension",
+    "publish",
+    "webstore"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
