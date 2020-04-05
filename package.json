@@ -1,14 +1,7 @@
 {
   "name": "chrome-store-update",
-  "version": "0.1.0",
-  "license": "MIT",
+  "version": "0.2.0",
   "description": "Update a Chrome Store listings programatically",
-  "repository": "carlosjeurissen/chrome-store-update",
-  "author": "Carlos Jeurissen",
-  "license": "MIT",
-  "dependencies": {
-    "chrome-webstore-upload": "^0.2.2"
-  },
   "keywords": [
     "chrome",
     "store",
@@ -18,6 +11,23 @@
     "publish",
     "webstore"
   ],
+  "homepage": "https://github.com/carlosjeurissen/chrome-store-update#readme",
+  "bugs": {
+    "url": "https://github.com/carlosjeurissen/chrome-store-update/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlosjeurissen/chrome-store-update.git"
+  },
+  "license": "MIT",
+  "author": "Carlos Jeurissen",
+  "main": "index.js",
+  "bin": {
+    "chrome-store-update": "./index.js"
+  },
+  "dependencies": {
+    "chrome-webstore-upload": "^0.2.2"
+  },
   "engines": {
     "node": ">=8.0.0"
   }
