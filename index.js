@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const chromeWebstoreUpload = require('chrome-webstore-upload');
+const usedAsCli = process.argv[1].endsWith('/chrome-store-update');
 
 function getRefreshToken (parameters) {
   const standardInput = process.stdin;
@@ -51,10 +52,13 @@ async function updateAndPublish (parameters) {
 const updatePackage = parameters => {
   return updateAndPublish(parameters)
     .catch(console.error)
-    .then(process.exit);
+    .then(function () {
+      if (usedAsCli) {
+        process.exit();
+      }
+    });
 };
 
-const usedAsCli = process.argv[1].endsWith('/chrome-store-update');
 if (usedAsCli) {
   const argList = process.argv.join('=').split('=');
   const params = {};
