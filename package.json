@@ -1,6 +1,6 @@
 {
   "name": "chrome-store-update",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Update a Chrome Store listings programatically",
   "keywords": [
     "chrome",

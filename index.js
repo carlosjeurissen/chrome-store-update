@@ -54,8 +54,9 @@ const updatePackage = parameters => {
     .then(process.exit);
 };
 
-const argList = process.argv.join('=').split('=');
-if (argList.length > 2) {
+const usedAsCli = process.argv[1].endsWith('/chrome-store-update');
+if (usedAsCli) {
+  const argList = process.argv.join('=').split('=');
   const params = {};
   argList.forEach((item, index) => {
     if (item === '--credentials-path' || item === '-cp') {
