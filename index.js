@@ -3,7 +3,9 @@
 
 const fs = require('fs');
 const chromeWebstoreUpload = require('chrome-webstore-upload');
-const usedAsCli = process.argv[1].endsWith('/chrome-store-update');
+
+const executionPath = process.argv[1].replace(/\\+/g, '/');
+const usedAsCli = executionPath.endsWith('/chrome-store-update') || executionPath.endsWith('/chrome-store-update/index.js');
 
 function getRefreshToken (parameters) {
   const standardInput = process.stdin;
