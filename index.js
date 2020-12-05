@@ -24,14 +24,30 @@ function getRefreshToken (parameters) {
   });
 }
 
-function handleVars (input) {
+function readJsonFile (filePath) {
+  try {
+    const fileText = fs.readFileSync(filePath);
+    return JSON.parse(fileText);
+  } catch (e) {
+    console.log('Couldn\'t read json file: ' + e);
+  }
+}
+
+function getVersion () {
   const version = process.env.npm_package_version;
+  if (version) return version;
+  const packageJson = readJsonFile('./package.json') || {};
+  return packageJson.version || 'unknown';
+}
+
+function handleVars (input) {
+  const version = getVersion();
   const home = process.env.HOME;
   return input.replace('{version}', version).replace('{home}', home);
 }
 
 async function updateAndPublish (parameters) {
-  const credentials = parameters.credentials || JSON.parse(fs.readFileSync(handleVars(parameters.credentialsPath)));
+  const credentials = parameters.credentials || readJsonFile(handleVars(parameters.credentialsPath)) || {};
   const refreshToken = credentials.refreshToken || await getRefreshToken();
 
   const webStoreApi = chromeWebstoreUpload({
