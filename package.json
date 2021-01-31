@@ -1,6 +1,6 @@
 {
   "name": "chrome-store-update",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Update a Chrome Store listings programatically",
   "keywords": [
     "chrome",
@@ -26,7 +26,7 @@
     "chrome-store-update": "index.js"
   },
   "dependencies": {
-    "chrome-webstore-upload": "~0.4.2"
+    "chrome-webstore-upload": "~0.4.4"
   },
   "devDependencies": {
     "semistandard": "~16.0.0"
