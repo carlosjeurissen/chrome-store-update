@@ -1,6 +1,6 @@
 {
   "name": "chrome-store-update",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Update a Chrome Store listings programatically",
   "keywords": [
     "chrome",
@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "author": "Carlos Jeurissen",
+  "type": "module",
   "main": "index.js",
   "bin": {
     "chrome-store-update": "cli.js"
