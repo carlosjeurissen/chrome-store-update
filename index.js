@@ -1,17 +1,10 @@
-#!/usr/bin/env node
+import fs from 'node:fs';
+import chromeWebstoreUpload from 'chrome-webstore-upload';
 
-'use strict';
-
-const fs = require('fs');
-const chromeWebstoreUpload = require('chrome-webstore-upload');
-
-const executionPath = process.argv[1].replace(/\\+/g, '/');
-const usedAsCli = executionPath.endsWith('/chrome-store-update') || executionPath.endsWith('/chrome-store-update/index.js');
-
-function getRefreshToken (parameters) {
+function getRefreshToken () {
   const standardInput = process.stdin;
 
-  standardInput.setEncoding('utf-8');
+  standardInput.setEncoding('utf8');
   standardInput.setRawMode(true);
 
   console.log('Enter your refresh token');
@@ -31,13 +24,14 @@ function readJsonFile (filePath) {
     return JSON.parse(fileText);
   } catch (e) {
     console.log('Couldn\'t read json file: ' + e);
+    return {};
   }
 }
 
 function getVersion () {
   const version = process.env.npm_package_version;
   if (version) return version;
-  const packageJson = readJsonFile('./package.json') || {};
+  const packageJson = readJsonFile('./package.json');
   return packageJson.version || 'unknown';
 }
 
@@ -47,8 +41,8 @@ function handleVars (input) {
   return input.replace('{version}', version).replace('{home}', home);
 }
 
-async function updateAndPublish (parameters) {
-  const credentials = parameters.credentials || readJsonFile(handleVars(parameters.credentialsPath)) || {};
+export default async function updateAndPublish (parameters) {
+  const credentials = parameters.credentials || readJsonFile(handleVars(parameters.credentialsPath));
   const refreshToken = credentials.refreshToken || await getRefreshToken();
 
   const webStoreApi = chromeWebstoreUpload({
@@ -67,29 +61,3 @@ async function updateAndPublish (parameters) {
   const publishResult = await webStoreApi.publish('default', accessToken);
   console.log(publishResult);
 }
-
-const updatePackage = (parameters) => updateAndPublish(parameters)
-  .catch(console.error)
-  .then(() => {
-    if (usedAsCli) {
-      process.exit();
-    }
-  });
-
-if (usedAsCli) {
-  const argList = process.argv.join('=').split('=');
-  const params = {};
-  argList.forEach((item, index) => {
-    if (item === '--credentials-path' || item === '-cp') {
-      params.credentialsPath = argList[index + 1];
-    } else if (item === '--package-path' || item === '-pp') {
-      params.packagePath = argList[index + 1];
-    } else if (item === '--extension-id' || item === '-e') {
-      params.extensionId = argList[index + 1];
-    }
-  });
-  updatePackage(params);
-}
-
-exports.publish = updatePackage;
-module.exports = exports.publish;
