@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict';
 
 const fs = require('fs');
@@ -15,8 +16,8 @@ function getRefreshToken (parameters) {
 
   console.log('Enter your refresh token');
 
-  return new Promise(function (resolve) {
-    standardInput.on('data', function (data) {
+  return new Promise((resolve) => {
+    standardInput.on('data', (data) => {
       standardInput.setRawMode(false);
       console.log('Thanks! Uploading now...');
       resolve(data);
@@ -54,7 +55,7 @@ async function updateAndPublish (parameters) {
     extensionId: parameters.extensionId,
     clientId: credentials.clientId,
     clientSecret: credentials.clientSecret,
-    refreshToken: refreshToken
+    refreshToken: refreshToken,
   });
 
   const accessToken = await webStoreApi.fetchToken();
@@ -67,15 +68,13 @@ async function updateAndPublish (parameters) {
   console.log(publishResult);
 }
 
-const updatePackage = parameters => {
-  return updateAndPublish(parameters)
-    .catch(console.error)
-    .then(function () {
-      if (usedAsCli) {
-        process.exit();
-      }
-    });
-};
+const updatePackage = (parameters) => updateAndPublish(parameters)
+  .catch(console.error)
+  .then(() => {
+    if (usedAsCli) {
+      process.exit();
+    }
+  });
 
 if (usedAsCli) {
   const argList = process.argv.join('=').split('=');
