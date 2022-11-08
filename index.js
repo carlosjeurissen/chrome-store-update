@@ -20,7 +20,7 @@ function getRefreshToken () {
 
 function readJsonFile (filePath) {
   try {
-    const fileText = fs.readFileSync(filePath);
+    const fileText = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(fileText);
   } catch (e) {
     console.log('Couldn\'t read json file: ' + e);
@@ -42,7 +42,8 @@ function handleVars (input) {
 }
 
 export default async function updateAndPublish (parameters) {
-  const credentials = parameters.credentials || readJsonFile(handleVars(parameters.credentialsPath));
+  const credentials = parameters.credentials
+    || readJsonFile(handleVars(parameters.credentialsPath));
   const refreshToken = credentials.refreshToken || await getRefreshToken();
 
   const webStoreApi = chromeWebstoreUpload({
@@ -54,7 +55,8 @@ export default async function updateAndPublish (parameters) {
 
   const accessToken = await webStoreApi.fetchToken();
 
-  const packageStream = parameters.package || fs.createReadStream(handleVars(parameters.packagePath));
+  const packageStream = parameters.package
+    || fs.createReadStream(handleVars(parameters.packagePath));
   const uploadResult = await webStoreApi.uploadExisting(packageStream, accessToken);
   console.log(uploadResult);
 
