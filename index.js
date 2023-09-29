@@ -47,9 +47,9 @@ export default async function updateAndPublish (parameters) {
   const refreshToken = credentials.refreshToken || await getRefreshToken();
 
   const webStoreApi = chromeWebstoreUpload({
-    extensionId: parameters.extensionId,
     clientId: credentials.clientId,
     clientSecret: credentials.clientSecret,
+    extensionId: parameters.extensionId,
     refreshToken: refreshToken,
   });
 
