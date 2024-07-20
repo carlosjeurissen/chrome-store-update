@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// eslint-disable-next-line import/extensions
 import updateAndPublish from './index.js';
 
 const argList = process.argv.join('=').split('=');
@@ -15,5 +14,5 @@ argList.forEach((item, index) => {
   }
 });
 
-// eslint-disable-next-line no-console, promise/catch-or-return
+// eslint-disable-next-line no-console
 updateAndPublish(params).catch(console.error).then(() => process.exit(0));
