@@ -1,6 +1,6 @@
 {
   "name": "chrome-store-update",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Update a Chrome Store listings programatically",
   "keywords": [
     "chrome",
@@ -27,11 +27,11 @@
     "chrome-store-update": "cli.js"
   },
   "dependencies": {
-    "chrome-webstore-upload": "^3.1.0"
+    "chrome-webstore-upload": "^3.1.4"
   },
   "devDependencies": {
-    "eslint": "^9.7.0",
-    "eslint-config-ccb": "^0.26.1"
+    "eslint": "^9.16.0",
+    "eslint-config-ccb": "^0.31.0"
   },
   "scripts": {
     "lint-fix": "eslint *.js --fix"
