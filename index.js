@@ -4,7 +4,7 @@ import chromeWebstoreUpload from 'chrome-webstore-upload';
 function getRefreshToken () {
   const standardInput = process.stdin;
 
-  standardInput.setEncoding('utf8');
+  standardInput.setEncoding('utf-8');
   standardInput.setRawMode(true);
 
   console.log('Enter your refresh token');
@@ -20,7 +20,7 @@ function getRefreshToken () {
 
 function readJsonFile (filePath) {
   try {
-    const fileText = fs.readFileSync(filePath, 'utf8');
+    const fileText = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(fileText);
   } catch (e) {
     console.log('Couldn\'t read json file: ' + e);
